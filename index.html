@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LibraX - Online Library Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= LOGIN PAGE ================= -->
+
+<div id="loginPage" class="login-page">
+
+    <div class="login-container">
+
+        <div class="login-left">
+
+            <div class="brand-large">
+                📚 <span>LibraX</span>
+            </div>
+
+            <h1>Online Library<br>Management System</h1>
+
+            <p>
+                Search, borrow, reserve and manage books
+                from one powerful platform.
+            </p>
+
+            <div class="login-features">
+                <span>✓ Smart Book Search</span>
+                <span>✓ Easy Borrowing</span>
+                <span>✓ Overdue Notifications</span>
+                <span>✓ Digital History</span>
+            </div>
+
+        </div>
+
+
+        <div class="login-box">
+
+            <div class="login-icon">📚</div>
+
+            <h2>Welcome Back!</h2>
+
+            <p class="login-subtitle">
+                Login to continue to LibraX
+            </p>
+
+            <label>Email / Username</label>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter username"
+            >
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+            >
+
+            <label>Select Role</label>
+
+            <select id="loginRole">
+
+                <option value="student">
+                    Student / User
+                </option>
+
+                <option value="librarian">
+                    Librarian
+                </option>
+
+                <option value="admin">
+                    Administrator
+                </option>
+
+            </select>
+
+            <button
+                class="login-btn"
+                onclick="login()">
+
+                Login →
+            </button>
+
+            <p class="demo-text">
+                Demo: Enter any username and password
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MAIN APPLICATION ================= -->
+
+<div id="app" class="app hidden">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            📚 <span>LibraX</span>
+        </div>
+
+        <div class="role-display">
+            <span id="roleIcon">👨‍🎓</span>
+
+            <div>
+                <strong id="roleName">
+                    Student
+                </strong>
+
+                <small id="userNameDisplay">
+                    User
+                </small>
+            </div>
+        </div>
+
+
+        <nav>
+
+            <a
+                href="#dashboard"
+                class="nav-link active"
+                onclick="showPage('dashboard', this)">
+                🏠 Dashboard
+            </a>
+
+            <a
+                href="#books"
+                class="nav-link"
+                onclick="showPage('books', this)">
+                📚 Books
+            </a>
+
+            <a
+                href="#borrowed"
+                class="nav-link"
+                onclick="showPage('borrowed', this)">
+                📖 Borrowed Books
+            </a>
+
+            <a
+                href="#reservations"
+                class="nav-link"
+                onclick="showPage('reservations', this)">
+                📌 Reservations
+            </a>
+
+            <a
+                href="#history"
+                class="nav-link"
+                onclick="showPage('history', this)">
+                🕘 History
+            </a>
+
+            <a
+                href="#notifications"
+                class="nav-link"
+                onclick="showPage('notifications', this)">
+                🔔 Notifications
+                <span class="notification-count">3</span>
+            </a>
+
+            <a
+                href="#reports"
+                class="nav-link admin-only"
+                onclick="showPage('reports', this)">
+                📊 Reports
+            </a>
+
+            <a
+                href="#users"
+                class="nav-link admin-only"
+                onclick="showPage('users', this)">
+                👥 Users
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button onclick="toggleTheme()">
+                🌙 Dark Mode
+            </button>
+
+            <button onclick="logout()">
+                🚪 Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div>
+
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()">
+                    ☰
+                </button>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+                <p id="pageSubtitle">
+                    Welcome to your library dashboard.
+                </p>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <button
+                    class="notification-btn"
+                    onclick="showPage('notifications')">
+
+                    🔔
+
+                    <span>3</span>
+
+                </button>
+
+                <div class="profile-mini">
+
+                    <div class="avatar">
+                        KR
+                    </div>
+
+                    <div>
+                        <strong id="headerUser">
+                            Keerthana
+                        </strong>
+
+                        <small id="headerRole">
+                            Student
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboard" class="page active-page">
+
+            <div class="welcome-banner">
+
+                <div>
+
+                    <span class="greeting">
+                        Good Morning 👋
+                    </span>
+
+                    <h2>
+                        Welcome to LibraX!
+                    </h2>
+
+                    <p>
+                        Find your next great book today.
+                    </p>
+
+                </div>
+
+                <div class="banner-book">
+                    📚
+                </div>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue-icon">
+                        📚
+                    </div>
+
+                    <div>
+                        <span>Total Books</span>
+                        <h2 id="totalBooks">
+                            1250
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green-icon">
+                        ✓
+                    </div>
+
+                    <div>
+                        <span>Available</span>
+                        <h2 id="availableBooks">
+                            856
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple-icon">
+                        📖
+                    </div>
+
+                    <div>
+                        <span>Borrowed</span>
+                        <h2 id="borrowedCount">
+                            4
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red-icon">
+                        ⏰
+                    </div>
+
+                    <div>
+                        <span>Overdue</span>
+                        <h2 id="overdueCount">
+                            2
+                        </h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD CONTENT -->
+
+            <div class="two-column">
+
+
+                <!-- Popular Books -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h3>Popular Books</h3>
+                            <p>Most borrowed this month</p>
+                        </div>
+
+                        <button
+                            class="text-btn"
+                            onclick="showPage('books')">
+
+                            View All →
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="popular-book">
+
+                        <div class="mini-cover blue-cover">
+                            JAVA
+                        </div>
+
+                        <div class="book-details">
+
+                            <h4>Java Programming</h4>
+
+                            <p>
+                                Herbert Schildt
+                            </p>
+
+                            <span>
+                                ⭐ 4.8
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            128 borrows
+                        </strong>
+
+                    </div>
+
+
+                    <div class="popular-book">
+
+                        <div class="mini-cover green-cover">
+                            CODE
+                        </div>
+
+                        <div class="book-details">
+
+                            <h4>Clean Code</h4>
+
+                            <p>
+                                Robert C. Martin
+                            </p>
+
+                            <span>
+                                ⭐ 4.9
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            115 borrows
+                        </strong>
+
+                    </div>
+
+
+                    <div class="popular-book">
+
+                        <div class="mini-cover purple-cover">
+                            DB
+                        </div>
+
+                        <div class="book-details">
+
+                            <h4>Database System Concepts</h4>
+
+                            <p>
+                                Silberschatz
+                            </p>
+
+                            <span>
+                                ⭐ 4.7
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            102 borrows
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Quick Actions -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>Quick Actions</h3>
+
+                            <p>
+                                Frequently used actions
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+                        <button
+                            onclick="showPage('books')">
+
+                            <span>🔎</span>
+
+                            <div>
+                                <strong>Find a Book</strong>
+                                <small>
+                                    Search library
+                                </small>
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            onclick="showPage('borrowed')">
+
+                            <span>📖</span>
+
+                            <div>
+                                <strong>My Borrowed Books</strong>
+                                <small>
+                                    View current books
+                                </small>
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            onclick="showPage('reservations')">
+
+                            <span>📌</span>
+
+                            <div>
+                                <strong>Reservations</strong>
+                                <small>
+                                    Manage reservations
+                                </small>
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            onclick="showPage('history')">
+
+                            <span>🕘</span>
+
+                            <div>
+                                <strong>Borrowing History</strong>
+                                <small>
+                                    View past activity
+                                </small>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DUE SOON -->
+
+            <div class="dashboard-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>Due Soon</h3>
+
+                        <p>
+                            Books that need your attention
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="text-btn"
+                        onclick="showPage('borrowed')">
+
+                        View All →
+
+                    </button>
+
+                </div>
+
+
+                <div class="due-list">
+
+                    <div class="due-item">
+
+                        <div class="due-icon">
+                            📘
+                        </div>
+
+                        <div>
+                            <strong>
+                                Java Programming
+                            </strong>
+
+                            <small>
+                                Due: 04 Oct 2026
+                            </small>
+                        </div>
+
+                        <span class="status active">
+                            4 days left
+                        </span>
+
+                    </div>
+
+
+                    <div class="due-item">
+
+                        <div class="due-icon">
+                            📗
+                        </div>
+
+                        <div>
+                            <strong>
+                                Clean Code
+                            </strong>
+
+                            <small>
+                                Due: 24 Sep 2026
+                            </small>
+                        </div>
+
+                        <span class="status danger">
+                            Overdue
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= BOOKS ================= -->
+
+        <section id="books" class="page">
+
+            <div class="page-actions">
+
+                <div>
+
+                    <h2>Library Books</h2>
+
+                    <p>
+                        Browse and manage available books.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn admin-only"
+                    onclick="openAddBookModal()">
+
+                    + Add New Book
+
+                </button>
+
+            </div>
+
+
+            <div class="search-panel">
+
+                <div class="search-input">
+
+                    🔎
+
+                    <input
+                        type="text"
+                        id="bookSearch"
+                        placeholder="Search by title, author..."
+                        oninput="searchBooks()">
+
+                </div>
+
+
+                <select
+                    id="categoryFilter"
+                    onchange="filterBooks()">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="programming">
+                        Programming
+                    </option>
+
+                    <option value="database">
+                        Database
+                    </option>
+
+                    <option value="science">
+                        Science
+                    </option>
+
+                    <option value="fiction">
+                        Fiction
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="availabilityFilter"
+                    onchange="filterBooks()">
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="available">
+                        Available
+                    </option>
+
+                    <option value="borrowed">
+                        Borrowed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                id="booksGrid"
+                class="books-grid">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= BORROWED ================= -->
+
+        <section id="borrowed" class="page">
+
+            <div class="page-actions">
+
+                <div>
+
+                    <h2>My Borrowed Books</h2>
+
+                    <p>
+                        Track your currently borrowed books.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Book</th>
+                            <th>Borrow Date</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="borrowedTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= RESERVATIONS ================= -->
+
+        <section id="reservations" class="page">
+
+            <div class="page-actions">
+
+                <div>
+
+                    <h2>My Reservations</h2>
+
+                    <p>
+                        Manage your reserved books.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="reservationList"
+                class="reservation-list">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= HISTORY ================= -->
+
+        <section id="history" class="page">
+
+            <div class="page-actions">
+
+                <div>
+
+                    <h2>Borrowing History</h2>
+
+                    <p>
+                        Complete history of your library activity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Book</th>
+                            <th>Borrowed On</th>
+                            <th>Returned On</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="historyTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= NOTIFICATIONS ================= -->
+
+        <section id="notifications" class="page">
+
+            <div class="page-actions">
+
+                <div>
+
+                    <h2>Notifications</h2>
+
+                    <p>
+                        Important updates and reminders.
+                    </p>
+
+                </div>
+
+                <button
+                    class="secondary-btn"
+                    onclick="markNotificationsRead()">
+
+                    Mark all as read
+
+                </button>
+
+            </div>
+
+
+            <div class="notifications-list">
+
+                <div class="notification unread">
+
+                    <div class="notification-icon danger-bg">
+                        ⏰
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Book Overdue
+                        </strong>
+
+                        <p>
+                            Clean Code was due on
+                            24 Sep 2026.
+                        </p>
+
+                        <small>
+                            2 days ago
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification unread">
+
+                    <div class="notification-icon success-bg">
+                        📚
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Book Available
+                        </strong>
+
+                        <p>
+                            The book you reserved is now available.
+                        </p>
+
+                        <small>
+                            Yesterday
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification unread">
+
+                    <div class="notification-icon info-bg">
+                        🔔
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Due Date Reminder
+                        </strong>
+
+                        <p>
+                            Java Programming is due in 4 days.
+                        </p>
+
+                        <small>
+                            Today
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= REPORTS ================= -->
+
+        <section id="reports" class="page admin-page">
+
+            <div class="page-actions">
+
+                <div>
+
+                    <h2>Library Reports</h2>
+
+                    <p>
+                        Monitor library performance.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="generateReport()">
+
+                    📊 Generate Report
+
+                </button>
+
+            </div>
+
+
+            <div class="report-grid">
+
+                <div class="report-box">
+
+                    <span>📚</span>
+
+                    <h2>1,250</h2>
+
+                    <p>Total Books</p>
+
+                </div>
+
+
+                <div class="report-box">
+
+                    <span>👥</span>
+
+                    <h2>540</h2>
+
+                    <p>Registered Users</p>
+
+                </div>
+
+
+                <div class="report-box">
+
+                    <span>📖</span>
+
+                    <h2>394</h2>
+
+                    <p>Books Borrowed</p>
+
+                </div>
+
+
+                <div class="report-box">
+
+                    <span>⏰</span>
+
+                    <h2>27</h2>
+
+                    <p>Overdue Books</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card chart-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>Monthly Borrowing Activity</h3>
+
+                        <p>
+                            Number of books borrowed
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fake-chart">
+
+                    <div style="height:45%">
+                        <span>Jan</span>
+                    </div>
+
+                    <div style="height:65%">
+                        <span>Feb</span>
+                    </div>
+
+                    <div style="height:52%">
+                        <span>Mar</span>
+                    </div>
+
+                    <div style="height:78%">
+                        <span>Apr</span>
+                    </div>
+
+                    <div style="height:70%">
+                        <span>May</span>
+                    </div>
+
+                    <div style="height:90%">
+                        <span>Jun</span>
+                    </div>
+
+                    <div style="height:75%">
+                        <span>Jul</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= USERS ================= -->
+
+        <section id="users" class="page admin-page">
+
+            <div class="page-actions">
+
+                <div>
+
+                    <h2>User Management</h2>
+
+                    <p>
+                        Manage registered library users.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Books</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                <strong>Keerthana</strong>
+                            </td>
+
+                            <td>
+                                keerthana@gmail.com
+                            </td>
+
+                            <td>
+                                Student
+                            </td>
+
+                            <td>
+                                4
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>Rahul</strong>
+                            </td>
+
+                            <td>
+                                rahul@gmail.com
+                            </td>
+
+                            <td>
+                                Student
+                            </td>
+
+                            <td>
+                                2
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>Anjali</strong>
+                            </td>
+
+                            <td>
+                                anjali@gmail.com
+                            </td>
+
+                            <td>
+                                Librarian
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+                © 2026 LibraX | Online Library Management System
+            </p>
+
+            <span>
+                Built with HTML • CSS • JavaScript
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+
+<!-- ================= ADD BOOK MODAL ================= -->
+
+<div
+    id="bookModal"
+    class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Add New Book</h2>
+
+            <button onclick="closeBookModal()">
+                ×
+            </button>
+
+        </div>
+
+
+        <label>Book Title</label>
+
+        <input
+            type="text"
+            id="newBookTitle"
+            placeholder="Enter book title">
+
+
+        <label>Author</label>
+
+        <input
+            type="text"
+            id="newBookAuthor"
+            placeholder="Enter author">
+
+
+        <label>Category</label>
+
+        <select id="newBookCategory">
+
+            <option value="programming">
+                Programming
+            </option>
+
+            <option value="database">
+                Database
+            </option>
+
+            <option value="science">
+                Science
+            </option>
+
+            <option value="fiction">
+                Fiction
+            </option>
+
+        </select>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeBookModal()">
+
+                Cancel
+
+            </button>
+
+            <button
+                class="primary-btn"
+                onclick="addBook()">
+
+                Add Book
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast">
+
+    <span id="toastIcon">✓</span>
+
+    <span id="toastMessage">
+        Success
+    </span>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
