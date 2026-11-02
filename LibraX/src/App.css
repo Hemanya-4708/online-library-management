@@ -1,0 +1,807 @@
+
+/* =====================================
+   LIBRAX ADMIN DASHBOARD
+===================================== */
+
+.admin-dashboard {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 30px;
+  box-sizing: border-box;
+  color: #1e293b;
+}
+
+/* HERO */
+
+.admin-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 40px;
+  margin-bottom: 30px;
+  border-radius: 18px;
+  background: linear-gradient(120deg, #172554, #2563eb);
+  color: white;
+}
+
+.admin-tag {
+  color: #bfdbfe;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-hero h2 {
+  font-size: 32px;
+  margin: 12px 0;
+}
+
+.admin-hero p {
+  color: #dbeafe;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.admin-hero-icon {
+  font-size: 75px;
+}
+
+/* STATISTICS */
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+.admin-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 22px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 13px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
+
+.admin-stat-icon {
+  font-size: 30px;
+}
+
+.admin-stat-card h3 {
+  color: #1d4ed8;
+  font-size: 26px;
+  margin: 0 0 5px;
+}
+
+.admin-stat-card p {
+  color: #64748b;
+  font-size: 12px;
+  margin: 0;
+}
+
+/* SECTIONS */
+
+.admin-section {
+  margin-top: 35px;
+  padding: 26px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+}
+
+.admin-section-heading {
+  margin-bottom: 24px;
+}
+
+.admin-section-label {
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-section-heading h2 {
+  color: #172554;
+  font-size: 25px;
+  margin: 10px 0;
+}
+
+.admin-section-heading p {
+  color: #64748b;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ADD BOOK FORM */
+
+.admin-book-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.admin-book-form input {
+  width: 100%;
+  min-width: 0;
+  padding: 14px;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  font-size: 13px;
+}
+
+.admin-book-form input:focus,
+.admin-image-edit input:focus {
+  border-color: #2563eb;
+}
+
+.admin-book-form button {
+  grid-column: 1 / -1;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* BOOK GRID */
+
+.admin-book-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.admin-book-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 15px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 13px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.09);
+}
+
+/* BOOK COVERS */
+
+.admin-book-cover {
+  width: 100%;
+  height: 230px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #f1f5f9;
+}
+
+.admin-book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.admin-cover-fallback {
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.admin-cover-fallback span {
+  font-size: 42px;
+}
+
+.admin-cover-fallback small {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* BOOK DETAILS */
+
+.admin-book-details {
+  flex: 1;
+  padding: 15px 0;
+}
+
+.admin-book-details h3 {
+  min-height: 48px;
+  color: #172554;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.admin-book-details p {
+  min-height: 38px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+
+.admin-book-details > span {
+  display: inline-block;
+  padding: 6px 10px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* BOOK ACTION BUTTONS */
+
+.admin-edit-button,
+.admin-save-image,
+.admin-cancel-image,
+.admin-delete-button {
+  width: 100%;
+  padding: 11px;
+  margin-top: 9px;
+  border: none;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-edit-button,
+.admin-save-image {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.admin-cancel-image {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.admin-delete-button {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.admin-image-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.admin-image-edit input {
+  width: 100%;
+  min-width: 0;
+  padding: 11px;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  outline: none;
+  font-size: 12px;
+}
+
+/* STUDENT REQUESTS */
+
+.admin-request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-request-card {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+}
+
+.admin-request-icon {
+  font-size: 30px;
+}
+
+.admin-request-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-request-details h3 {
+  margin: 0 0 8px;
+  color: #172554;
+  font-size: 15px;
+}
+
+.admin-request-details p {
+  margin: 5px 0;
+  color: #64748b;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.admin-request-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.admin-request-status {
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.admin-action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.approve-button,
+.reject-button {
+  padding: 9px 13px;
+  border: none;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.approve-button {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.reject-button {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* EMPTY STATE */
+
+.admin-empty {
+  padding: 40px 15px;
+  text-align: center;
+  background: #f8fafc;
+  border-radius: 12px;
+  color: #64748b;
+}
+
+.admin-empty > span {
+  font-size: 40px;
+}
+
+.admin-empty h3 {
+  color: #172554;
+}
+
+/* FOOTER */
+
+.admin-footer-note {
+  text-align: center;
+  margin-top: 45px;
+  padding: 28px 15px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.admin-footer-note p {
+  color: #1e40af;
+  font-weight: 700;
+}
+
+.admin-footer-note span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 950px) {
+  .admin-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-dashboard {
+    padding: 15px;
+  }
+
+  .admin-hero {
+    padding: 25px;
+  }
+
+  .admin-hero h2 {
+    font-size: 25px;
+  }
+
+  .admin-hero-icon {
+    display: none;
+  }
+
+  .admin-stats,
+  .admin-book-grid,
+  .admin-book-form {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-section {
+    padding: 16px;
+  }
+
+  .admin-request-card {
+    flex-wrap: wrap;
+  }
+
+  .admin-request-actions {
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+
+/* =====================================
+   LIBRAX LOGIN AND AUTHENTICATION
+===================================== */
+
+.auth-page {
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #f8fafc;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 25px auto;
+  max-width: 1200px;
+  box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
+}
+
+/* BRAND PANEL */
+
+.auth-brand-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 55px;
+  background: linear-gradient(145deg, #172554, #1d4ed8);
+  color: white;
+}
+
+.auth-brand-content {
+  max-width: 430px;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 65px;
+}
+
+.auth-logo span {
+  font-size: 35px;
+}
+
+.auth-logo h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.auth-brand-tag {
+  color: #bfdbfe;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.auth-brand-content h2 {
+  font-size: 48px;
+  line-height: 1.15;
+  margin: 20px 0;
+}
+
+.auth-brand-content > p {
+  color: #dbeafe;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 370px;
+}
+
+.auth-brand-decoration {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 35px;
+}
+
+.auth-brand-decoration span {
+  font-size: 36px;
+}
+
+.auth-brand-footer {
+  color: #bfdbfe;
+  font-size: 12px;
+}
+
+/* FORM PANEL */
+
+.auth-form-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 45px;
+}
+
+.auth-form-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-mobile-logo {
+  display: none;
+  color: #1d4ed8;
+  font-size: 23px;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+.auth-form-tag {
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.auth-form-card h2 {
+  color: #172554;
+  font-size: 29px;
+  margin: 12px 0;
+}
+
+.auth-description {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* INPUTS */
+
+.auth-form-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form-card label {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 16px 0 8px;
+}
+
+.auth-form-card form > input,
+.auth-password-field input {
+  width: 100%;
+  min-width: 0;
+  padding: 14px;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+  font-size: 13px;
+}
+
+.auth-form-card input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.auth-password-field {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.auth-password-field input {
+  padding-right: 65px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* LOGIN BUTTON */
+
+.auth-submit-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 27px;
+  padding: 15px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.auth-submit-button:hover {
+  background: #1e40af;
+}
+
+/* ADMIN DEMO DETAILS */
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 27px 0 20px;
+  color: #94a3b8;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.auth-admin-note {
+  padding: 15px;
+  border: 1px solid #bfdbfe;
+  border-radius: 9px;
+  background: #eff6ff;
+}
+
+.auth-admin-note strong {
+  color: #1e40af;
+  font-size: 12px;
+}
+
+.auth-admin-note p {
+  color: #475569;
+  font-size: 12px;
+  margin: 7px 0 0;
+}
+
+/* SIGNUP LINK */
+
+.auth-switch-text {
+  margin-top: 25px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.auth-switch-text a {
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-switch-text a:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-brand-panel {
+    display: none;
+  }
+
+  .auth-mobile-logo {
+    display: block;
+  }
+
+  .auth-form-panel {
+    padding: 35px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    margin: 12px;
+  }
+
+  .auth-form-panel {
+    padding: 25px 18px;
+  }
+
+  .auth-form-card h2 {
+    font-size: 24px;
+  }
+}
+
+/* SIGNUP BENEFITS */
+
+.auth-benefits {
+  margin-top: 20px;
+  padding: 13px 15px;
+  background: #f8fafc;
+  border-radius: 9px;
+}
+
+.auth-benefits p {
+  color: #475569;
+  font-size: 12px;
+  margin: 8px 0;
+}
+
+/* FIX: SIGNUP AND LOGIN INPUT TEXT VISIBILITY */
+
+.auth-form-card input {
+  color: #1e293b !important;
+  background-color: #ffffff !important;
+  caret-color: #2563eb;
+  opacity: 1;
+}
+
+.auth-form-card input::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1;
+}
+
+.auth-form-card input:-webkit-autofill {
+  -webkit-text-fill-color: #1e293b !important;
+}
