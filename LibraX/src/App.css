@@ -805,3 +805,31 @@
 .auth-form-card input:-webkit-autofill {
   -webkit-text-fill-color: #1e293b !important;
 }
+
+/* USER DASHBOARD BOOK GRID */
+.user-dashboard .book-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.user-dashboard .book-card {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .user-dashboard .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .user-dashboard .book-grid {
+    grid-template-columns: 1fr;
+  }
+}

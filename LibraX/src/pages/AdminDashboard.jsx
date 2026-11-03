@@ -1,13 +1,97 @@
 
 import { useState } from 'react'
 
-function AdminDashboard() {
-  const [books, setBooks] = useState(
-    JSON.parse(localStorage.getItem('books')) || []
-  )
+// DEFAULT BOOK COLLECTION
+const defaultBooks = [
+  {
+    id: 1,
+    title: 'Python Programming',
+    author: 'Guido van Rossum',
+    category: 'Programming',
+    image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=500'
+  },
+  {
+    id: 2,
+    title: 'Python Crash Course',
+    author: 'Eric Matthes',
+    category: 'Python Programming',
+    image: 'https://covers.openlibrary.org/b/isbn/9781593279288-L.jpg'
+  },
+  {
+    id: 3,
+    title: 'Head First Java',
+    author: 'Kathy Sierra, Bert Bates and Trisha Gee',
+    category: 'Java Programming',
+    image: 'https://covers.openlibrary.org/b/isbn/9781491910771-L.jpg'
+  },
+  {
+    id: 4,
+    title: 'Grokking Algorithms',
+    author: 'Aditya Bhargava',
+    category: 'Data Structures',
+    image: 'https://covers.openlibrary.org/b/isbn/9781617292231-L.jpg'
+  },
+  {
+    id: 5,
+    title: 'Operating System Concepts',
+    author: 'Abraham Silberschatz, Peter B. Galvin and Greg Gagne',
+    category: 'Operating Systems',
+    image: 'https://covers.openlibrary.org/b/isbn/9788126554270-L.jpg'
+  },
+  {
+    id: 6,
+    title: 'Database System Concepts',
+    author: 'Abraham Silberschatz, Henry F. Korth and S. Sudarshan',
+    category: 'Database Management',
+    image: 'https://covers.openlibrary.org/b/isbn/9780078022159-L.jpg'
+  },
+  {
+    id: 7,
+    title: 'Artificial Intelligence: A Modern Approach',
+    author: 'Stuart Russell and Peter Norvig',
+    category: 'Artificial Intelligence',
+    image: 'https://covers.openlibrary.org/b/isbn/9780134610993-L.jpg'
+  },
+  {
+    id: 8,
+    title: 'Clean Code',
+    author: 'Robert C. Martin',
+    category: 'Software Engineering',
+    image: 'https://covers.openlibrary.org/b/isbn/9780132350884-L.jpg'
+  },
+  {
+    id: 9,
+    title: 'Designing Data-Intensive Applications',
+    author: 'Martin Kleppmann',
+    category: 'Data Engineering',
+    image: 'https://covers.openlibrary.org/b/isbn/9781449373320-L.jpg'
+  },
+  {
+    id: 10,
+    title: 'Test Book',
+    author: 'Test Author',
+    category: 'Testing',
+    image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500'
+  }
+]
 
-  const [requests, setRequests] = useState(
-    JSON.parse(localStorage.getItem('requests')) || []
+function AdminDashboard() {
+  // LOAD BOOKS FROM LOCAL STORAGE OR USE DEFAULT BOOKS
+  const [books, setBooks] = useState(() => {
+    const savedBooks = JSON.parse(
+      localStorage.getItem('books') || '[]'
+    )
+
+    if (savedBooks.length > 0) {
+      return savedBooks
+    }
+
+    localStorage.setItem('books', JSON.stringify(defaultBooks))
+    return defaultBooks
+  })
+
+  const [requests, setRequests] = useState(() =>
+    JSON.parse(localStorage.getItem('requests') || '[]')
   )
 
   const [title, setTitle] = useState('')

@@ -1,13 +1,96 @@
 
 import { useState } from 'react'
 
-function UserDashboard({ currentUser }) {
-  const [books] = useState(
-    JSON.parse(localStorage.getItem('books')) || []
-  )
+// DEFAULT BOOK COLLECTION
+const defaultBooks = [
+  {
+    id: 1,
+    title: 'Python Programming',
+    author: 'Guido van Rossum',
+    category: 'Programming',
+    image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=500'
+  },
+  {
+    id: 2,
+    title: 'Python Crash Course',
+    author: 'Eric Matthes',
+    category: 'Python Programming',
+    image: 'https://covers.openlibrary.org/b/isbn/9781593279288-L.jpg'
+  },
+  {
+    id: 3,
+    title: 'Head First Java',
+    author: 'Kathy Sierra, Bert Bates and Trisha Gee',
+    category: 'Java Programming',
+    image: 'https://covers.openlibrary.org/b/isbn/9781491910771-L.jpg'
+  },
+  {
+    id: 4,
+    title: 'Grokking Algorithms',
+    author: 'Aditya Bhargava',
+    category: 'Data Structures',
+    image: 'https://covers.openlibrary.org/b/isbn/9781617292231-L.jpg'
+  },
+  {
+    id: 5,
+    title: 'Operating System Concepts',
+    author: 'Abraham Silberschatz, Peter B. Galvin and Greg Gagne',
+    category: 'Operating Systems',
+    image: 'https://covers.openlibrary.org/b/isbn/9788126554270-L.jpg'
+  },
+  {
+    id: 6,
+    title: 'Database System Concepts',
+    author: 'Abraham Silberschatz, Henry F. Korth and S. Sudarshan',
+    category: 'Database Management',
+    image: 'https://covers.openlibrary.org/b/isbn/9780078022159-L.jpg'
+  },
+  {
+    id: 7,
+    title: 'Artificial Intelligence: A Modern Approach',
+    author: 'Stuart Russell and Peter Norvig',
+    category: 'Artificial Intelligence',
+    image: 'https://covers.openlibrary.org/b/isbn/9780134610993-L.jpg'
+  },
+  {
+    id: 8,
+    title: 'Clean Code',
+    author: 'Robert C. Martin',
+    category: 'Software Engineering',
+    image: 'https://covers.openlibrary.org/b/isbn/9780132350884-L.jpg'
+  },
+  {
+    id: 9,
+    title: 'Designing Data-Intensive Applications',
+    author: 'Martin Kleppmann',
+    category: 'Data Engineering',
+    image: 'https://covers.openlibrary.org/b/isbn/9781449373320-L.jpg'
+  },
+  {
+    id: 10,
+    title: 'Test Book',
+    author: 'Test Author',
+    category: 'Testing',
+    image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500'
+  }
+]
 
-  const [requests, setRequests] = useState(
-    JSON.parse(localStorage.getItem('requests')) || []
+function UserDashboard({ currentUser }) {
+
+  // LOAD DEFAULT BOOKS WHEN NO BOOK DATA EXISTS
+  const [books] = useState(() => {
+    const savedBooks = localStorage.getItem('books')
+
+    if (savedBooks === null) {
+      localStorage.setItem('books', JSON.stringify(defaultBooks))
+      return defaultBooks
+    }
+
+    return JSON.parse(savedBooks)
+  })
+
+  const [requests, setRequests] = useState(() =>
+    JSON.parse(localStorage.getItem('requests') || '[]')
   )
 
   const [search, setSearch] = useState('')
@@ -63,11 +146,14 @@ function UserDashboard({ currentUser }) {
       <section className="user-hero">
         <div className="hero-content">
           <span className="hero-tag">YOUR DIGITAL LIBRARY</span>
+
           <h2>Welcome back, {currentUser.name}!</h2>
+
           <p>
             Discover your next favourite book. Explore, learn
             and grow with LibraX.
           </p>
+
           <a href="#available-books" className="hero-button">
             Explore Books <span>→</span>
           </a>
@@ -78,6 +164,7 @@ function UserDashboard({ currentUser }) {
 
       {/* Statistics */}
       <section className="user-stats">
+
         <div className="stat-card">
           <span className="stat-icon">📖</span>
           <div>
@@ -103,6 +190,7 @@ function UserDashboard({ currentUser }) {
             <p>Approved Requests</p>
           </div>
         </div>
+
       </section>
 
       {/* Book Collection */}
@@ -118,6 +206,7 @@ function UserDashboard({ currentUser }) {
 
         <div className="library-search">
           <span>🔍</span>
+
           <input
             type="text"
             placeholder="Search by title, author or category..."
@@ -128,21 +217,29 @@ function UserDashboard({ currentUser }) {
 
         <div className="book-count-row">
           <h3 className="book-count">Available Books</h3>
-          <span className="book-total">{filteredBooks.length} Books</span>
+          <span className="book-total">
+            {filteredBooks.length} Books
+          </span>
         </div>
 
         {filteredBooks.length === 0 ? (
+
           <div className="empty-state">
             <span>📚</span>
             <h3>No books found</h3>
             <p>Try searching with another title or author.</p>
           </div>
+
         ) : (
+
           <div className="book-grid">
+
             {filteredBooks.map((book) => (
+
               <article className="book-card" key={book.id}>
 
                 <div className="book-image">
+
                   {book.image ? (
                     <img
                       src={book.image}
@@ -157,7 +254,9 @@ function UserDashboard({ currentUser }) {
 
                   <div
                     className="book-image-fallback"
-                    style={{ display: book.image ? 'none' : 'grid' }}
+                    style={{
+                      display: book.image ? 'none' : 'grid'
+                    }}
                   >
                     <span>📖</span>
                     <small>LIBRAX COLLECTION</small>
@@ -166,10 +265,13 @@ function UserDashboard({ currentUser }) {
                   <span className="book-category">
                     {book.category}
                   </span>
+
                 </div>
 
                 <div className="book-info">
+
                   <h3>{book.title}</h3>
+
                   <p className="book-author">
                     By {book.author}
                   </p>
@@ -180,12 +282,17 @@ function UserDashboard({ currentUser }) {
                   >
                     Request Book <span>→</span>
                   </button>
+
                 </div>
 
               </article>
+
             ))}
+
           </div>
+
         )}
+
       </section>
 
       {/* My Requests */}
@@ -200,15 +307,21 @@ function UserDashboard({ currentUser }) {
         </div>
 
         {myRequests.length === 0 ? (
+
           <div className="empty-state">
             <span>📝</span>
             <h3>No requests yet</h3>
             <p>Explore the collection and request your first book.</p>
           </div>
+
         ) : (
+
           <div className="request-list">
+
             {myRequests.map((request) => (
+
               <div className="request-card" key={request.id}>
+
                 <div className="request-book-icon">📕</div>
 
                 <div className="request-book-details">
@@ -216,13 +329,20 @@ function UserDashboard({ currentUser }) {
                   <p>Book request</p>
                 </div>
 
-                <span className={`request-status ${getStatusClass(request.status)}`}>
+                <span
+                  className={`request-status ${getStatusClass(request.status)}`}
+                >
                   {request.status}
                 </span>
+
               </div>
+
             ))}
+
           </div>
+
         )}
+
       </section>
 
       {/* Footer */}
